@@ -1,2 +1,3 @@
 # urel
-URL Utility, Create Short Link/ Generate &amp; Read QR/ Create Custom Page.
+URL Utility, Create Short Links, Generate &amp; Read QR and Create Custom Page.
+
