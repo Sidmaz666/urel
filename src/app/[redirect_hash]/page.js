@@ -11,5 +11,8 @@ export default async function Redirect({params}){
   if(!hash || hash.length < 2) return (<RedirectMiddleMan text={"Invalid URL!"}/>)
   const checkExist = await Hash.findOne({ hash })
   if(!checkExist) return (<RedirectMiddleMan text={"URL Doesn't Exist!"}/>)
-  redirect(encodeURIComponent(checkExist.url))
+  const url = new URL(checkExist.url);
+  url.search = encodeURIComponent(url.search);
+  const encodedUrl = url.toString();
+  redirect(encodedUrl)
 }
