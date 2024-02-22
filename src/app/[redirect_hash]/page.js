@@ -12,7 +12,11 @@ export default async function Redirect({params}){
   const checkExist = await Hash.findOne({ hash })
   if(!checkExist) return (<RedirectMiddleMan text={"URL Doesn't Exist!"}/>)
   const url = new URL(checkExist.url);
-  url.search = encodeURIComponent(url.search);
+  const searchParams = new URLSearchParams(url.search);
+  for (const [key, value] of searchParams.entries()) {
+    searchParams.set(key, encodeURIComponent(value));
+  }
+  url.search = searchParams.toString();
   const encodedUrl = url.toString();
-  redirect(encodedUrl)
+  redirect(encodedUrl);
 }
